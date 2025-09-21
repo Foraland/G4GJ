@@ -3,22 +3,23 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Floor
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Friend
+  - Floor
+  - DangerTrigger
+  - DangerItem
+  - TrapArea
+  - Extra
+  - Checkpoint
+  - AttackArea
   - 
   - 
   - 
