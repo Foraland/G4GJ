@@ -9,24 +9,40 @@ public class GM : Singleton<GM>
 {
     public Transform root;
     public CheckPoint checkPoint;
-    private GameController ctrl;
     private MonoBehaviour mono;
     private Vector3 checkPos => checkPoint.transform.position;
     private Coroutine resetCor = null;
     public RoomCtrl currentRoom;
+    public bool isGrass = true;
+    public bool isInTransition = false;
+    public event Action triggerTrapDanger = () => { };
+    public event Action alertSnake = () => { };
+    public event Action enterNextRoom = () => { };
+    public event Action exitCurRoom = () => { };
+    public void TriggerTrap()
+    {
+        triggerTrapDanger.Invoke();
+    }
+    public void EnterRoom()
+    {
+        enterNextRoom.Invoke();
+    }
+    public void ExitRoom()
+    {
+        exitCurRoom.Invoke();
+    }
     public void Init(Transform root)
     {
         this.root = root;
-        ctrl = new GameController();
         mono = root.GetComponent<MonoBehaviour>();
     }
     public void SetEnd()
     {
-        ctrl.playEnd = true;
+        GameController.Ins.playEnd = true;
     }
     public void OnStart()
     {
-        mono.StartCoroutine(ctrl.StartGame());
+        GameController.Ins.StartGame();
     }
     public void OnUpdate()
     {
@@ -67,13 +83,15 @@ public class GM : Singleton<GM>
     }
     IEnumerator ResetToCheckpointIE(Action midCb)
     {
-        Player.Ins.EnterStory();
+        isInTransition = true;
+        Player.Ins.BanCtrl();
         yield return Fadding.Ins.FadeIn();
         midCb?.Invoke();
         Player.Ins.rb.position = checkPos;
         Friend.Ins.rb.position = new Vector3(checkPos.x - Friend.Ins.distance, checkPos.y, 0);
         yield return Fadding.Ins.FadeOut();
-        Player.Ins.ExitStory();
+        Player.Ins.ResumeCtrl();
         resetCor = null;
+        isInTransition = false;
     }
 }

@@ -5,6 +5,11 @@ public class WaitState : PlayerStateBase
     public WaitState(Player player) : base(player)
     {
     }
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        owner.PlayAnim("Idle");
+    }
     public override void OnFixedUpdate()
     {
         base.OnFixedUpdate();
@@ -13,6 +18,6 @@ public class WaitState : PlayerStateBase
         if (!owner.isInGround)
             owner.velocity.y = owner.velocity.y - Time.fixedDeltaTime * owner.gravity;
         else
-            owner.isResetY = true;
+            owner.isResetVY = true;
     }
 }

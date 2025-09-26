@@ -7,6 +7,8 @@ public class TrapArea : MonoBehaviour
     public Trap trap;
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (GM.Ins.isInTransition)
+            return;
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
             trap.OnTrigger();
     }

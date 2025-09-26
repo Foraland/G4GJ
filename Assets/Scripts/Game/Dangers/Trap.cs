@@ -8,16 +8,19 @@ public class Trap : DangerItem
     private bool isDropping = false;
     public float gravity = 200;
     private float vy = 0;
+    public ParticleSystem ps;
     public void Reset()
     {
         isDropping = false;
         transform.position = resetPos.position;
         hasResolved = false;
         vy = 0;
+        gameObject.SetActive(true);
     }
     public void OnTrigger()
     {
         isDropping = true;
+        GM.Ins.TriggerTrap();
     }
     void FixedUpdate()
     {
@@ -44,6 +47,7 @@ public class Trap : DangerItem
     }
     void LandToBreak()
     {
-
+        ps.Play();
+        gameObject.SetActive(false);
     }
 }

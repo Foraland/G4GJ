@@ -8,7 +8,12 @@ public class ExitEntra : MonoBehaviour
     protected virtual void OnTouchEntra()
     {
         Player.Ins.ExitAllDanger();
-        GM.Ins.ResetToCheckpoint(() => nextRoom.OnEnter());
+        GM.Ins.ExitRoom();
+        GM.Ins.ResetToCheckpoint(() =>
+        {
+            nextRoom.OnEnter();
+            GM.Ins.EnterRoom();
+        });
     }
     void OnTriggerEnter2D(Collider2D collision)
     {

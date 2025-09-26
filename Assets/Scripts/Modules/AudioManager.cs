@@ -2,8 +2,8 @@
 using UnityEngine;
 public static class AudioManager
 {
-	const string MusicPath = "Music/";
-	const string SFXPath = "SFX/";
+	const string MusicPath = "Audio/Music/";
+	const string SFXPath = "Audio/SFX/";
 	private static AudioSource musicSource;
 	private static Dictionary<string, AudioSource> sfxSources = new Dictionary<string, AudioSource>();
 

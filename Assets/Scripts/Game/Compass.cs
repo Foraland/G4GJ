@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using UnityEngine;
 using UnityEngine.UI;
 public class DangerInfo
@@ -22,6 +24,8 @@ public class Compass : SingletonComp<Compass>
     public Transform farestPoint;
     public GameObject prefab;
     private float maxDist => farestPoint.GetComponent<RectTransform>().anchoredPosition.magnitude;
+    private float fadeTimer = 0;
+    private TweenerCore<float, float, FloatOptions> fadeTwn = null;
     public void EnterDanger(IDangerTarget target)
     {
         dangerInfos.Add(new DangerInfo(target, alertTime));
@@ -32,6 +36,26 @@ public class Compass : SingletonComp<Compass>
     }
     void Update()
     {
+        if (dangerInfos.Count == 0)
+        {
+            if (fadeTimer > 3)
+            {
+                if (fadeTwn == null)
+                    fadeTwn = canvasGrp.DOFade(0, 1);
+            }
+            else
+                fadeTimer += Time.deltaTime;
+        }
+        else
+        {
+            fadeTimer = 0;
+            if (fadeTwn != null)
+            {
+                fadeTwn.Complete();
+                canvasGrp.alpha = 1;
+                fadeTwn = null;
+            }
+        }
         for (int i = 0; i < dangerInfos.Count; i++)
         {
             DangerInfo info = dangerInfos[i];
@@ -53,9 +77,9 @@ public class Compass : SingletonComp<Compass>
         RectTransform rt = go.GetComponent<RectTransform>();
         rt.anchoredPosition = lp;
         rt.localScale = new Vector3(1, 1, 1);
-        rt.DOScale(2, 0.5f).SetEase(Ease.OutQuad);
-        Image sprr = go.GetComponent<Image>();
-        sprr.color = new Color(sprr.color.r, sprr.color.g, sprr.color.b, 255);
-        sprr.DOFade(0, 0.7f).SetEase(Ease.InQuad).onComplete = () => go.OPPush();
+        rt.DOScale(3, 0.5f).SetEase(Ease.OutQuad);
+        Image img = go.GetComponent<Image>();
+        img.color = new Color(img.color.r, img.color.g, img.color.b, 255);
+        img.DOFade(0, 0.7f).SetEase(Ease.InQuad).onComplete = () => go.OPPush();
     }
 }

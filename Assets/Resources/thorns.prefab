@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2683544956819914750}
   - component: {fileID: 5328461973812525842}
   - component: {fileID: 5178275305960136638}
+  - component: {fileID: 6102727308663174291}
   m_Layer: 9
   m_Name: thorns
   m_TagString: Floor
@@ -28,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.1211, y: -0.6186, z: 0}
-  m_LocalScale: {x: 1.422654, y: 3.7074459, z: 1}
+  m_LocalScale: {x: 2.63191, y: 6.9295516, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.5529412, g: 0.118496194, b: 0, a: 1}
+  m_Color: {r: 0.5529412, g: 0.118496194, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -130,3 +131,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &6102727308663174291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606430284808310636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 448ad3ecc9869b64bbb1b2b7472b065a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  room: {fileID: 0}
+  hasResolved: 0
+  hp: 3
+  cropSFX: []
+  sprr: {fileID: 0}
